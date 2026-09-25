@@ -1,0 +1,16 @@
+{
+  "name": "4bzdog.github.io",
+  "private": true,
+  "description": "Landing page for 4BZDOG's projects, rebuilt from live GitHub data.",
+  "type": "module",
+  "scripts": {
+    "build": "node scripts/build.mjs",
+    "build:offline": "node scripts/build.mjs --offline",
+    "snapshot": "node scripts/build.mjs --snapshot",
+    "serve": "node scripts/serve.mjs",
+    "dev": "node scripts/build.mjs --offline && node scripts/serve.mjs"
+  },
+  "engines": {
+    "node": ">=20"
+  }
+}

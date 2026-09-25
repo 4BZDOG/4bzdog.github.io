@@ -1,0 +1,103 @@
+{
+  "generatedAt": "2026-09-25T20:04:06.976Z",
+  "repos": {
+    "HSC-Writing-Master": {
+      "name": "HSC-Writing-Master",
+      "description": "Intelligent writing coach for NSW HSC subjects. Features a deep syllabus navigator, 'Ruthless Marker' evaluation persona, real-time writing metrics, and a generative content studio for creating practice questions and sample answers.",
+      "homepage": "",
+      "hasPages": true,
+      "fork": false,
+      "archived": false,
+      "language": "TypeScript",
+      "stars": 0,
+      "created": "2025-12-10T19:17:38Z",
+      "pushed": "2026-09-23T22:59:34Z",
+      "url": "https://github.com/4BZDOG/HSC-Writing-Master",
+      "commits": 627
+    },
+    "puzzle-suite": {
+      "name": "puzzle-suite",
+      "description": "",
+      "homepage": "",
+      "hasPages": true,
+      "fork": false,
+      "archived": false,
+      "language": "JavaScript",
+      "stars": 0,
+      "created": "2026-03-11T21:35:04Z",
+      "pushed": "2026-09-14T02:39:14Z",
+      "url": "https://github.com/4BZDOG/puzzle-suite",
+      "commits": 73
+    },
+    "trusscraft": {
+      "name": "trusscraft",
+      "description": "TrussCraft — a single-file browser game for teaching statics: build a bridge, run a load test, watch the forces.",
+      "homepage": "",
+      "hasPages": true,
+      "fork": false,
+      "archived": false,
+      "language": "HTML",
+      "stars": 0,
+      "created": "2026-09-07T23:28:58Z",
+      "pushed": "2026-09-08T04:47:21Z",
+      "url": "https://github.com/4BZDOG/trusscraft",
+      "commits": 13
+    },
+    "maths-suite": {
+      "name": "maths-suite",
+      "description": "",
+      "homepage": "",
+      "hasPages": true,
+      "fork": false,
+      "archived": false,
+      "language": "JavaScript",
+      "stars": 0,
+      "created": "2026-03-16T19:19:21Z",
+      "pushed": "2026-09-07T04:25:50Z",
+      "url": "https://github.com/4BZDOG/maths-suite",
+      "commits": 303
+    },
+    "HSC_SoftwareEngineering": {
+      "name": "HSC_SoftwareEngineering",
+      "description": "",
+      "homepage": "",
+      "hasPages": true,
+      "fork": false,
+      "archived": false,
+      "language": "HTML",
+      "stars": 0,
+      "created": "2026-03-17T19:29:28Z",
+      "pushed": "2026-06-29T21:08:39Z",
+      "url": "https://github.com/4BZDOG/HSC_SoftwareEngineering",
+      "commits": 189
+    },
+    "classroom-noise-monitor": {
+      "name": "classroom-noise-monitor",
+      "description": "Real-time classroom noise monitor with gamification, alerts, and projector mode",
+      "homepage": "",
+      "hasPages": true,
+      "fork": false,
+      "archived": false,
+      "language": "JavaScript",
+      "stars": 0,
+      "created": "2026-04-19T06:55:15Z",
+      "pushed": "2026-06-23T02:29:32Z",
+      "url": "https://github.com/4BZDOG/classroom-noise-monitor",
+      "commits": 10
+    },
+    "like-terms-match": {
+      "name": "like-terms-match",
+      "description": "",
+      "homepage": "",
+      "hasPages": true,
+      "fork": false,
+      "archived": false,
+      "language": "HTML",
+      "stars": 0,
+      "created": "2026-05-21T23:59:34Z",
+      "pushed": "2026-06-01T22:32:38Z",
+      "url": "https://github.com/4BZDOG/like-terms-match",
+      "commits": 7
+    }
+  }
+}

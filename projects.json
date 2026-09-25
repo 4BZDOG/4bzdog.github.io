@@ -1,0 +1,174 @@
+{
+  "owner": "4BZDOG",
+  "siteRepo": "4bzdog.github.io",
+  "exclude": ["4bzdog.github.io"],
+  "groups": {
+    "play": {
+      "numeral": "I",
+      "title": "Play",
+      "subtitle": "games that sneak the lesson in",
+      "blurb": "Physics you can break, algebra you can match, and a classroom that can hear itself. These started as lesson hooks and grew teeth."
+    },
+    "work": {
+      "numeral": "II",
+      "title": "Work",
+      "subtitle": "tools that give the weekend back",
+      "blurb": "Marking, worksheet making and course notes: the jobs that eat a teacher's Sunday, handed to software that does them properly."
+    },
+    "lab": {
+      "numeral": "III",
+      "title": "Lab",
+      "subtitle": "fresh from GitHub, not yet catalogued",
+      "blurb": "New repositories are picked up here automatically every time the site rebuilds."
+    }
+  },
+  "projects": [
+    {
+      "repo": "trusscraft",
+      "group": "play",
+      "title": "TrussCraft",
+      "kind": "Game",
+      "subject": "Physics · Statics",
+      "scene": "truss",
+      "accent": "#5aa9ff",
+      "tagline": "Build a bridge. Run the load test. Watch the forces.",
+      "description": "A bridge-building game for teaching statics. Students lay roadway, timber, steel and cable across a gorge, then send a truck over while every member lights up blue in tension or red in compression. Each of the seven levels forbids the last level's answer, and every budget was set by searching for the cheapest bridge that actually survives.",
+      "features": [
+        "Seven levels, from triangulation to cantilevers",
+        "Live Verlet physics with Euler buckling",
+        "Every failure explains which member gave way, and why",
+        "One offline HTML file: no install, no libraries"
+      ],
+      "stack": ["Vanilla JS", "Canvas", "Web Audio", "Verlet physics"],
+      "cta": "Play TrussCraft",
+      "caption": "Live truss under a moving load. Blue is tension, red is compression. Drag a joint to load it yourself.",
+      "alt": "Animated truss bridge with a truck crossing it; members glow blue in tension and red in compression."
+    },
+    {
+      "repo": "like-terms-match",
+      "group": "play",
+      "title": "Like Terms Match",
+      "kind": "Game",
+      "subject": "Maths · Algebra",
+      "scene": "terms",
+      "accent": "#00f0c8",
+      "tagline": "A neon match-three where only like terms combine.",
+      "description": "Swap tiles on a rotating 3D board to line up three or more like terms and simplify them. Coefficients don't matter, only the pronumeral and its power, which is the whole lesson. PEMDAS bombs clear rows and columns, divide-by-zero traps cost you shields, and the colour-coding fades away as students level up.",
+      "features": [
+        "3D board you can spin mid-game",
+        "PEMDAS bombs and divide-by-zero traps",
+        "Scaffolding that fades as students improve",
+        "Arcade high-score table, initials and all"
+      ],
+      "stack": ["Three.js", "WebGL", "Single HTML file"],
+      "cta": "Play it",
+      "caption": "A real match-three engine finding swaps and simplifying. Move your pointer to tilt the board.",
+      "alt": "A tilted neon grid of algebraic terms; groups of three like terms light up and combine."
+    },
+    {
+      "repo": "classroom-noise-monitor",
+      "group": "play",
+      "title": "Classroom Noise Monitor",
+      "kind": "Classroom tool",
+      "subject": "Behaviour · Wellbeing",
+      "scene": "noise",
+      "accent": "#7be495",
+      "tagline": "A volume meter the whole class can see, so nobody has to shout.",
+      "description": "Turns any device's microphone into a friendly, real-time noise meter for the projector. A colour-changing creature, quiet challenges, attention signals and end-of-lesson reports let a class see how loud the room is and regulate itself. Audio is analysed on the device and never recorded, uploaded or stored.",
+      "features": [
+        "Presets for library, group work, presentations and tests",
+        "Auto-calibrates to the room's baseline",
+        "Quiet challenges, achievements and session grades",
+        "Privacy first: audio never leaves the browser"
+      ],
+      "stack": ["Vanilla JS", "Web Audio API", "Canvas"],
+      "cta": "Open the monitor",
+      "caption": "A simulated classroom. Press “Use my mic” to drive it with your own room; the audio stays in this tab.",
+      "alt": "A circular volume gauge with a smiling creature in the middle that changes colour as the simulated room gets louder."
+    },
+    {
+      "repo": "HSC-Writing-Master",
+      "group": "work",
+      "title": "Band 6",
+      "kind": "AI writing coach",
+      "subject": "All HSC subjects",
+      "scene": "band6",
+      "accent": "#8f82ff",
+      "tagline": "An AI marker that grades like a senior HSC examiner, then shows you the next band.",
+      "description": "Students answer an HSC question and get it marked against the NESA band descriptors by a deliberately ruthless marker. A response that describes when the question says analyse is capped at Band 3, however long it is, and every mark comes with specific Band N+1 feedback. Teachers get a syllabus navigator, a question generator and an audit that fills gaps across a whole course.",
+      "features": [
+        "Marks against NESA band descriptors and command verbs",
+        "Specific Band N+1 feedback on every response",
+        "Syllabus navigator down to individual dot points",
+        "Offline-first, with classes, quotas and a choice of AI providers"
+      ],
+      "stack": ["React 19", "TypeScript", "Vite", "Tailwind", "Gemini", "Supabase"],
+      "cta": "Try Band 6",
+      "caption": "A “describe” answer to an “analyse” question: marked, capped, then rewritten a band higher.",
+      "alt": "A typed exam answer on lined paper being annotated in red pen, with a six-bar band meter rising from Band 3 to Band 5."
+    },
+    {
+      "repo": "maths-suite",
+      "group": "work",
+      "title": "Maths Suite",
+      "kind": "Worksheet generator",
+      "subject": "Maths · Stage 4–5",
+      "scene": "maths",
+      "accent": "#ffb44a",
+      "tagline": "Differentiated maths worksheets from a seed, exported as vector PDF.",
+      "description": "Pick a stage, topics and NESA outcomes, and Maths Suite generates easy, medium and hard question sets with an answer key and optional worked solutions. Thirteen topics from integers to trigonometry, with geometry diagrams drawn on the fly. Every set comes from a seed, so the same seed always rebuilds the same worksheet.",
+      "features": [
+        "13 topics across Stage 4, Stage 5 and the 5.3 path",
+        "Filter questions by NESA outcome code",
+        "Inline SVG geometry diagrams",
+        "Seeded and reproducible, so a seed is a shareable worksheet"
+      ],
+      "stack": ["Vanilla JS", "esbuild", "jsPDF", "KaTeX", "Cloudflare Workers"],
+      "cta": "Make a worksheet",
+      "caption": "A seeded generator. The same seed always produces the same questions.",
+      "alt": "A maths worksheet whose seed number rolls over while fresh questions, including a right-angled triangle diagram, appear."
+    },
+    {
+      "repo": "puzzle-suite",
+      "group": "work",
+      "title": "Puzzle Suite",
+      "kind": "Worksheet generator",
+      "subject": "Literacy · Vocabulary",
+      "scene": "puzzle",
+      "accent": "#ff7eb6",
+      "tagline": "Type in one word list, get a whole vocabulary pack.",
+      "description": "Type a list of words and clues and get a matching vocabulary sheet, word search, crossword, word scramble and answer keys, laid out and exported as a single vector PDF. Bulk export makes a unique set for every student, and AI can suggest a word list from a topic if you bring your own key.",
+      "features": [
+        "Notes, word search, crossword, scramble and answer keys",
+        "Auto-placed crosswords that fit on one page",
+        "Bulk export of unique sets for a whole class",
+        "AI word lists with your own Gemini, Claude, OpenAI or Groq key"
+      ],
+      "stack": ["Vanilla JS", "Web Workers", "jsPDF", "esbuild", "Stripe"],
+      "cta": "Make a puzzle pack",
+      "caption": "Words placed, then found. In the real app the generator runs in a Web Worker.",
+      "alt": "A word search grid being generated, with highlighter strokes finding each vocabulary word in turn."
+    },
+    {
+      "repo": "HSC_SoftwareEngineering",
+      "group": "work",
+      "title": "Software Engineering Notes",
+      "kind": "Study guide",
+      "subject": "HSC Software Engineering · Y11–12",
+      "scene": "softeng",
+      "accent": "#c9b8ff",
+      "tagline": "Every dot point of the HSC Software Engineering course, written to be read.",
+      "description": "A free study guide for NSW HSC Software Engineering covering every Year 11 and Year 12 topic. It includes an SDLC guide with case studies from Spotify to the Boeing 737 MAX, and exam advice mapped to the NESA command verbs. The diagrams are written in Mermaid, so the flowcharts, class diagrams and state machines are all readable source.",
+      "features": [
+        "All Year 11 and Year 12 topics",
+        "SDLC guide with success and failure case studies",
+        "Mermaid flowcharts, DFDs, class and state diagrams",
+        "Glossary, dark mode and exam command verbs"
+      ],
+      "stack": ["HTML", "CSS", "Mermaid", "Python"],
+      "cta": "Read the notes",
+      "caption": "Linear search, traced step by step through its flowchart and its NESA-style pseudocode.",
+      "alt": "A flowchart and pseudocode for linear search, with a marker stepping through each node while an array pointer moves along."
+    }
+  ]
+}
