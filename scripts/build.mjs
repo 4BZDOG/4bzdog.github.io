@@ -250,6 +250,7 @@ function renderExhibit(p) {
     ? `<ul class="features">${p.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>`
     : '';
   const stack = p.stack.length ? `<ul class="stack" aria-label="Built with">${p.stack.map((t) => `<li>${esc(t)}</li>`).join('')}</ul>` : '';
+  const pricing = renderPricing(p.pricing);
   const desc = p.description ? `<p class="desc">${esc(p.description)}</p>` : '';
   const sourceBtn = p.url !== p.source
     ? `<a class="btn ghost" href="${esc(p.source)}">${GITHUB}<span>Source</span></a>`
@@ -272,12 +273,40 @@ function renderExhibit(p) {
         ${features}
         ${stack}
         ${meta}
+        ${pricing}
         <div class="actions">
           <a class="btn primary" href="${esc(p.url)}"><span>${esc(p.cta)}</span>${ARROW}</a>
           ${sourceBtn}
         </div>
       </div>
     </article>`;
+}
+
+function renderPricing(pr) {
+  if (!pr) return '';
+  if (pr.model === 'free') return `<p class="price-free"><span>Free</span> ${esc(pr.note)}</p>`;
+  const tiers = pr.tiers
+    .map((t) => `
+          <li class="tier${t.highlight ? ' best' : ''}">
+            <p class="tier-name">${esc(t.name)}${t.highlight ? ' <em>Most popular</em>' : ''}</p>
+            <p class="tier-price">${esc(t.price)}<small>${esc(t.period)}</small></p>
+            <ul>${t.features.map((f) => `<li>${esc(f)}</li>`).join('')}</ul>
+          </li>`)
+    .join('');
+  return `<div class="pricing"><ol class="tiers" aria-label="Pricing">${tiers}
+        </ol><p class="price-note">${esc(pr.note)}</p></div>`;
+}
+
+function renderBundle() {
+  const b = config.bundle;
+  if (!b) return '';
+  return `
+    <aside class="bundle" data-reveal>
+      <p class="label">Bundle</p>
+      <p class="bundle-title">${esc(b.title)}</p>
+      <p class="bundle-blurb">${esc(b.blurb)}</p>
+      <p class="bundle-price">${esc(b.price)}<small> ${esc(b.period)} · ${esc(b.alt)}</small></p>
+    </aside>`;
 }
 
 function renderChapters(projects) {
@@ -293,6 +322,7 @@ function renderChapters(projects) {
       <p class="chapter-blurb">${esc(g.blurb)}</p>
     </header>
     ${list.map(renderExhibit).join('\n')}
+    ${key === 'work' ? renderBundle() : ''}
   </section>`;
     })
     .join('\n');

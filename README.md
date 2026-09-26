@@ -61,6 +61,8 @@ Each project entry looks like this:
 
 `url` is optional. It defaults to the repo's GitHub Pages address.
 
+Add `"pricing": {"model": "free", "note": "…"}` for a Free badge, or `{"model": "paid", "note": "…", "tiers": [{"name", "price", "period", "features": [], "highlight": true}]}` for tier cards. The top-level `bundle` object renders the Teacher Toolkit card under the Work chapter. Specs for porting three of the plates into their own projects are in `docs/specs/`.
+
 ### Scenes
 
 Every plate is a small module in `src/js/scenes/` that exports `(host, { reduced, accent, seed }) => ({ start, stop })`. The page loads a scene only when its plate scrolls near the screen, and pauses it again when it scrolls away or the tab is hidden. When the visitor prefers reduced motion, `reduced` is `true` and every scene draws a single still frame instead of animating.

@@ -1,7 +1,9 @@
 {
   "owner": "4BZDOG",
   "siteRepo": "4bzdog.github.io",
-  "exclude": ["4bzdog.github.io"],
+  "exclude": [
+    "4bzdog.github.io"
+  ],
   "groups": {
     "play": {
       "numeral": "I",
@@ -39,10 +41,19 @@
         "Every failure explains which member gave way, and why",
         "One offline HTML file: no install, no libraries"
       ],
-      "stack": ["Vanilla JS", "Canvas", "Web Audio", "Verlet physics"],
+      "stack": [
+        "Vanilla JS",
+        "Canvas",
+        "Web Audio",
+        "Verlet physics"
+      ],
       "cta": "Play TrussCraft",
       "caption": "Live truss under a moving load. Blue is tension, red is compression. Drag a joint to load it yourself.",
-      "alt": "Animated truss bridge with a truck crossing it; members glow blue in tension and red in compression."
+      "alt": "Animated truss bridge with a truck crossing it; members glow blue in tension and red in compression.",
+      "pricing": {
+        "model": "free",
+        "note": "Free forever. No account, no ads, works offline."
+      }
     },
     {
       "repo": "like-terms-match",
@@ -60,10 +71,18 @@
         "Scaffolding that fades as students improve",
         "Arcade high-score table, initials and all"
       ],
-      "stack": ["Three.js", "WebGL", "Single HTML file"],
+      "stack": [
+        "Three.js",
+        "WebGL",
+        "Single HTML file"
+      ],
       "cta": "Play it",
       "caption": "A real match-three engine finding swaps and simplifying. Move your pointer to tilt the board.",
-      "alt": "A tilted neon grid of algebraic terms; groups of three like terms light up and combine."
+      "alt": "A tilted neon grid of algebraic terms; groups of three like terms light up and combine.",
+      "pricing": {
+        "model": "free",
+        "note": "Free forever. Built to be played in class, on any device."
+      }
     },
     {
       "repo": "classroom-noise-monitor",
@@ -81,10 +100,18 @@
         "Quiet challenges, achievements and session grades",
         "Privacy first: audio never leaves the browser"
       ],
-      "stack": ["Vanilla JS", "Web Audio API", "Canvas"],
+      "stack": [
+        "Vanilla JS",
+        "Web Audio API",
+        "Canvas"
+      ],
       "cta": "Open the monitor",
       "caption": "A simulated classroom. Press “Use my mic” to drive it with your own room; the audio stays in this tab.",
-      "alt": "A circular volume gauge with a smiling creature in the middle that changes colour as the simulated room gets louder."
+      "alt": "A circular volume gauge with a smiling creature in the middle that changes colour as the simulated room gets louder.",
+      "pricing": {
+        "model": "free",
+        "note": "Free forever. Nothing to sign up for, and audio never leaves the room."
+      }
     },
     {
       "repo": "HSC-Writing-Master",
@@ -102,10 +129,54 @@
         "Syllabus navigator down to individual dot points",
         "Offline-first, with classes, quotas and a choice of AI providers"
       ],
-      "stack": ["React 19", "TypeScript", "Vite", "Tailwind", "Gemini", "Supabase"],
+      "stack": [
+        "React 19",
+        "TypeScript",
+        "Vite",
+        "Tailwind",
+        "Gemini",
+        "Supabase"
+      ],
       "cta": "Try Band 6",
       "caption": "A “describe” answer to an “analyse” question: marked, capped, then rewritten a band higher.",
-      "alt": "A typed exam answer on lined paper being annotated in red pen, with a six-bar band meter rising from Band 3 to Band 5."
+      "alt": "A typed exam answer on lined paper being annotated in red pen, with a six-bar band meter rising from Band 3 to Band 5.",
+      "pricing": {
+        "model": "paid",
+        "note": "Priced for the HSC year: students pay while it matters, schools pay once for everyone.",
+        "tiers": [
+          {
+            "name": "Free",
+            "price": "A$0",
+            "period": "",
+            "features": [
+              "5 marked responses",
+              "Summary feedback",
+              "Questions up to Tier 3"
+            ]
+          },
+          {
+            "name": "HSC Pass",
+            "price": "A$59",
+            "period": "to end of exams",
+            "highlight": true,
+            "features": [
+              "Unlimited marking",
+              "Full Band N+1 feedback",
+              "Band 6 sample answers"
+            ]
+          },
+          {
+            "name": "Class",
+            "price": "A$149",
+            "period": "per year",
+            "features": [
+              "Up to 30 students",
+              "Teacher dashboard",
+              "Question generator"
+            ]
+          }
+        ]
+      }
     },
     {
       "repo": "maths-suite",
@@ -123,10 +194,53 @@
         "Inline SVG geometry diagrams",
         "Seeded and reproducible, so a seed is a shareable worksheet"
       ],
-      "stack": ["Vanilla JS", "esbuild", "jsPDF", "KaTeX", "Cloudflare Workers"],
+      "stack": [
+        "Vanilla JS",
+        "esbuild",
+        "jsPDF",
+        "KaTeX",
+        "Cloudflare Workers"
+      ],
       "cta": "Make a worksheet",
       "caption": "A seeded generator. The same seed always produces the same questions.",
-      "alt": "A maths worksheet whose seed number rolls over while fresh questions, including a right-angled triangle diagram, appear."
+      "alt": "A maths worksheet whose seed number rolls over while fresh questions, including a right-angled triangle diagram, appear.",
+      "pricing": {
+        "model": "paid",
+        "note": "Free for a worksheet a week. Pro when it becomes part of your routine.",
+        "tiers": [
+          {
+            "name": "Free",
+            "price": "A$0",
+            "period": "",
+            "features": [
+              "All 13 topics",
+              "10 PDF exports a month",
+              "Stage 4 and 5"
+            ]
+          },
+          {
+            "name": "Pro",
+            "price": "A$7",
+            "period": "per month",
+            "highlight": true,
+            "features": [
+              "Unlimited exports",
+              "Bulk sets and worked solutions",
+              "or A$59 a year"
+            ]
+          },
+          {
+            "name": "School",
+            "price": "A$59",
+            "period": "per month",
+            "features": [
+              "Every teacher in the faculty",
+              "School watermark",
+              "Invoice billing"
+            ]
+          }
+        ]
+      }
     },
     {
       "repo": "puzzle-suite",
@@ -144,10 +258,53 @@
         "Bulk export of unique sets for a whole class",
         "AI word lists with your own Gemini, Claude, OpenAI or Groq key"
       ],
-      "stack": ["Vanilla JS", "Web Workers", "jsPDF", "esbuild", "Stripe"],
+      "stack": [
+        "Vanilla JS",
+        "Web Workers",
+        "jsPDF",
+        "esbuild",
+        "Stripe"
+      ],
       "cta": "Make a puzzle pack",
       "caption": "Words placed, then found. In the real app the generator runs in a Web Worker.",
-      "alt": "A word search grid being generated, with highlighter strokes finding each vocabulary word in turn."
+      "alt": "A word search grid being generated, with highlighter strokes finding each vocabulary word in turn.",
+      "pricing": {
+        "model": "paid",
+        "note": "The free tier is a complete tool. Pro is for teachers making packs every week.",
+        "tiers": [
+          {
+            "name": "Free",
+            "price": "A$0",
+            "period": "",
+            "features": [
+              "30 words a set",
+              "3 sets per export",
+              "All five puzzle types"
+            ]
+          },
+          {
+            "name": "Pro",
+            "price": "A$5",
+            "period": "per month",
+            "highlight": true,
+            "features": [
+              "50 words, 25 sets",
+              "or A$45 a year",
+              "or A$99 once, for life"
+            ]
+          },
+          {
+            "name": "School",
+            "price": "A$49",
+            "period": "per month",
+            "features": [
+              "Unlimited teachers",
+              "School branding",
+              "Managed AI credits"
+            ]
+          }
+        ]
+      }
     },
     {
       "repo": "HSC_SoftwareEngineering",
@@ -165,10 +322,26 @@
         "Mermaid flowcharts, DFDs, class and state diagrams",
         "Glossary, dark mode and exam command verbs"
       ],
-      "stack": ["HTML", "CSS", "Mermaid", "Python"],
+      "stack": [
+        "HTML",
+        "CSS",
+        "Mermaid",
+        "Python"
+      ],
       "cta": "Read the notes",
       "caption": "Linear search, traced step by step through its flowchart and its NESA-style pseudocode.",
-      "alt": "A flowchart and pseudocode for linear search, with a marker stepping through each node while an array pointer moves along."
+      "alt": "A flowchart and pseudocode for linear search, with a marker stepping through each node while an array pointer moves along.",
+      "pricing": {
+        "model": "free",
+        "note": "Free forever for every NSW student."
+      }
     }
-  ]
+  ],
+  "bundle": {
+    "title": "Teacher Toolkit",
+    "price": "A$9",
+    "period": "per month",
+    "alt": "or A$79 a year",
+    "blurb": "Maths Suite Pro and Puzzle Suite Pro together, for less than the two apart."
+  }
 }
