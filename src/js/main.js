@@ -215,7 +215,7 @@ async function initHero() {
    Project scenes: loaded lazily, and only animated while on screen.
    ========================================================================== */
 
-const KNOWN_SCENES = new Set(['truss', 'terms', 'noise', 'band6', 'maths', 'puzzle', 'softeng', 'constellation']);
+const KNOWN_SCENES = new Set(['truss', 'terms', 'noise', 'band6', 'maths', 'puzzle', 'softeng', 'entcomp', 'constellation']);
 const instances = new Map();
 const visible = new Set();
 

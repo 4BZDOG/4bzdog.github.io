@@ -31,7 +31,7 @@
     },
     "trusscraft": {
       "name": "trusscraft",
-      "description": "TrussCraft — a single-file browser game for teaching statics: build a bridge, run a load test, watch the forces.",
+      "description": "TrussCraft \u2014 a single-file browser game for teaching statics: build a bridge, run a load test, watch the forces.",
       "homepage": "",
       "hasPages": true,
       "fork": false,
@@ -98,6 +98,20 @@
       "pushed": "2026-06-01T22:32:38Z",
       "url": "https://github.com/4BZDOG/like-terms-match",
       "commits": 7
+    },
+    "HSC-Enterprise-Computing": {
+      "name": "HSC-Enterprise-Computing",
+      "description": "",
+      "homepage": "",
+      "hasPages": true,
+      "fork": false,
+      "archived": false,
+      "language": "HTML",
+      "stars": 0,
+      "created": "2026-09-29T00:00:00Z",
+      "pushed": "2026-09-30T06:02:56Z",
+      "url": "https://github.com/4BZDOG/HSC-Enterprise-Computing",
+      "commits": 27
     }
   }
 }

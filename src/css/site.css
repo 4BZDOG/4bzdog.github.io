@@ -962,3 +962,26 @@ kbd {
   .hero-label-mid { display: none; }
   .hero-label { justify-content: space-between; }
 }
+
+/* HSC Enterprise Computing: data set → chart → insight */
+.scene-entcomp { background: linear-gradient(160deg, #0d1f24, #0a161a); color: #d6f2f3; }
+.ec-wrap { position: absolute; inset: 0; display: grid; grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr); grid-template-rows: auto minmax(0, 1fr) auto; gap: 2.6cqh 3cqi; padding: 4cqh 4cqi 3.4cqh; font: 500 max(9px, 1.8cqi)/1.2 var(--mono); }
+.ec-bar { grid-column: 1 / -1; display: flex; justify-content: space-between; align-items: center; gap: 2cqi; padding-bottom: 1.6cqh; border-bottom: 1px solid rgba(62, 207, 217, 0.25); }
+.ec-file { color: #3ecfd9; }
+.ec-steps { display: flex; gap: 0.4em; font-size: 0.8em; letter-spacing: 0.08em; text-transform: uppercase; }
+.ec-steps span { padding: 0.35em 0.7em; border-radius: 4px; background: rgba(255, 255, 255, 0.06); color: #7da4a8; transition: background-color 0.25s, color 0.25s; }
+.ec-steps span.on { background: #3ecfd9; color: #0a161a; }
+.ec-table { align-self: start; display: grid; gap: 0.5cqh; }
+.ec-row { display: flex; justify-content: space-between; padding: 0.7em 0.9em; border-radius: 4px; background: rgba(255, 255, 255, 0.05); opacity: 0; transform: translateX(-8px); transition: opacity 0.3s, transform 0.3s var(--ease), background-color 0.3s; }
+.ec-row.in { opacity: 1; transform: none; }
+.ec-row.ec-head { opacity: 1; transform: none; background: none; color: #7da4a8; font-size: 0.85em; letter-spacing: 0.08em; text-transform: uppercase; padding-block: 0.2em; }
+.ec-table.clean .ec-row.in { background: rgba(62, 207, 217, 0.22); }
+.ec-chart { margin-bottom: 1.8em; display: flex; align-items: stretch; gap: 2cqi; border-bottom: 1px solid rgba(62, 207, 217, 0.4); }
+.ec-col { flex: 1; display: flex; flex-direction: column; justify-content: flex-end; align-items: center; position: relative; }
+.ec-col i { display: block; width: 100%; height: 0; background: #2a8f98; border-radius: 3px 3px 0 0; transition: height 0.6s var(--ease), background-color 0.3s; }
+.ec-col.in i { height: var(--h); }
+.ec-col.top i { background: #3ecfd9; box-shadow: 0 0 14px rgba(62, 207, 217, 0.55); }
+.ec-col small { position: absolute; top: calc(100% + 0.5em); color: #7da4a8; font-size: 0.8em; white-space: nowrap; }
+.ec-insight { grid-column: 1 / -1; margin: 1.2cqh 0 0; color: #3ecfd9; opacity: 0; transition: opacity 0.4s; }
+.ec-insight.on { opacity: 1; }
+@media (max-width: 520px) { .ec-table { display: none; } .ec-wrap { grid-template-columns: 1fr; } }
