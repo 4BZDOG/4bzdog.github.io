@@ -76,6 +76,7 @@ Every plate is a small module in `src/js/scenes/` that exports `(host, { reduced
 | `maths` | Seeded worksheet generator with a rolling seed odometer and SVG diagrams |
 | `puzzle` | Word search generated from a vocab list, then solved word by word |
 | `softeng` | Linear search traced through a flowchart, NESA pseudocode and an array |
+| `entcomp` | A small data set collected, cleaned and charted, with the tallest bar called out as the insight |
 | `constellation` | Default for new repos: a constellation seeded from the repo name |
 
 ## Local preview

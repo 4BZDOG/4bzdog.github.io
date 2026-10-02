@@ -335,6 +335,36 @@
         "model": "free",
         "note": "Free forever for every NSW student."
       }
+    },
+    {
+      "repo": "HSC-Enterprise-Computing",
+      "group": "work",
+      "title": "Enterprise Computing Notes",
+      "kind": "Study guide",
+      "subject": "HSC Enterprise Computing · Y11–12",
+      "scene": "entcomp",
+      "accent": "#3ecfd9",
+      "tagline": "The NESA Enterprise Computing syllabus, one dot point at a time.",
+      "description": "A free study guide for NSW HSC Enterprise Computing. Each focus area has its own page, split by NESA subheading, with every dot point quoted verbatim alongside its outcome codes and notes written to the depth its command verb asks for. It covers all 140 dot points from interactive media and cybersecurity to data science and the Enterprise Project, with a project management guide, a worked example project and a glossary.",
+      "features": [
+        "All 140 dot points across seven focus areas",
+        "Course toolkit, project guide and worked example project",
+        "Searchable glossary with inline popovers",
+        "Quizzes, reading progress and dark mode, with no libraries"
+      ],
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Python"
+      ],
+      "cta": "Read the notes",
+      "caption": "A small data set collected, cleaned and charted until the insight stands out.",
+      "alt": "A table of rows being cleaned and turned into a bar chart, with the tallest bar highlighted and a one-line insight underneath.",
+      "pricing": {
+        "model": "free",
+        "note": "Free forever for every NSW student."
+      }
     }
   ],
   "bundle": {
