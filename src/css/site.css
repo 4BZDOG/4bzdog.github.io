@@ -918,7 +918,10 @@ kbd {
   text-transform: uppercase;
   color: var(--dim);
 }
+.footer-links { flex-basis: 100%; display: flex; flex-wrap: wrap; gap: 8px 24px; padding-top: 12px; border-top: 1px dashed var(--line); }
 .footer a { text-decoration: none; }
+.footer-links a { text-decoration: underline; text-decoration-color: var(--line); text-underline-offset: 4px; }
+.footer-links a:hover { text-decoration-color: currentColor; }
 .footer a:hover { color: var(--text); }
 
 /* ------------------------------------------------------------------ reveal */
