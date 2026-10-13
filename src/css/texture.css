@@ -4,7 +4,11 @@
    and the glitches never fire.
    ========================================================================== */
 
-:root { --fx-grain: none; }
+:root {
+  --fx-grain: none;
+  /* The dimmest text sat at 4.4:1; lift it so labels stay readable over the texture. */
+  --dim: #8a8c9f;
+}
 
 /* The old static noise on body::after is replaced by the animated layer below. */
 body::after { display: none; }
@@ -14,9 +18,10 @@ body::after { display: none; }
 .fx-grain {
   position: fixed;
   inset: -50%;
-  z-index: 100;
+  /* Behind the content, above the page background: it textures the backdrop, never the text. */
+  z-index: -1;
   pointer-events: none;
-  opacity: 0.16;
+  opacity: 0.2;
   background-image: var(--fx-grain);
   background-size: 160px 160px;
   animation: fx-grain 1s steps(1) infinite;
@@ -51,10 +56,10 @@ body::after { display: none; }
   z-index: 4;
   overflow: hidden;
   pointer-events: none;
-  opacity: 0.55;
+  opacity: 0.32;
   mix-blend-mode: overlay;
   background:
-    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.28) 0 1px, transparent 1px 3px),
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.2) 0 1px, transparent 1px 4px),
     var(--fx-grain) 0 0 / 160px 160px;
 }
 .fx-plate::after {
