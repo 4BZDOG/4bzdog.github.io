@@ -367,6 +367,17 @@ function renderTimeline(projects, builtAt) {
       </div>`;
 }
 
+function renderMarquee(projects) {
+  const items = projects
+    .map((p) => `<span class="mq-item" style="--accent:${esc(p.accent)}"><i aria-hidden="true"></i>${esc(p.title)}<small>${esc(p.kind)}</small></span>`)
+    .join('');
+  // Two copies, so the track can loop seamlessly by sliding half its own width.
+  return items + items;
+}
+
+const toyboxData = (projects) =>
+  JSON.stringify(projects.map((p) => ({ repo: p.repo, title: p.title, kind: p.kind, accent: p.accent, group: p.group })));
+
 // ---------------------------------------------------------------- main
 
 const { stats, live } = await loadStats();
@@ -377,6 +388,8 @@ let html = await readFile(path.join(SRC, 'index.html'), 'utf8');
 const slots = {
   HERO_STATS: renderHeroStats(projects),
   ACCENTS: esc(projects.map((p) => p.accent).join(',')),
+  MARQUEE: renderMarquee(projects),
+  TOYBOX_DATA: esc(toyboxData(projects)),
   INDEX: renderIndex(projects),
   CHAPTERS: renderChapters(projects),
   TIMELINE: renderTimeline(projects, builtAt),
