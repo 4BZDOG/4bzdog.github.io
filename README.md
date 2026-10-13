@@ -63,6 +63,17 @@ Each project entry looks like this:
 
 Add `"pricing": {"model": "free", "note": "…"}` for a Free badge, or `{"model": "paid", "note": "…", "tiers": [{"name", "price", "period", "features": [], "highlight": true}]}` for tier cards. The top-level `bundle` object renders the Teacher Toolkit card under the Work chapter. Specs for porting three of the plates into their own projects are in `docs/specs/`.
 
+### Motion and the toybox
+
+Two optional layers sit on top of the page. If either fails to load, the page still works.
+
+| File | What it does |
+|---|---|
+| `src/js/motion.js`, `src/css/motion.css` | Scroll-progress bar, cursor spotlight tinted by the project under the pointer, magnetic buttons, heading scramble, staggered entrances, the scroll-reactive project marquee, drifting background grid and a pixel burst on the logo |
+| `src/js/toybox.js`, `src/css/toybox.css` | The Toybox: every project is a block in a small 2D rigid-body world. Drag, fling, shake or reset them, and tap one to jump to its plate. Touch-safe, keyboard reachable through a hidden link list, and a static grid under reduced motion |
+
+Both are generated from the same project list as the rest of the page, so new repos join the marquee and the toybox automatically.
+
 ### Scenes
 
 Every plate is a small module in `src/js/scenes/` that exports `(host, { reduced, accent, seed }) => ({ start, stop })`. The page loads a scene only when its plate scrolls near the screen, and pauses it again when it scrolls away or the tab is hidden. When the visitor prefers reduced motion, `reduced` is `true` and every scene draws a single still frame instead of animating.
@@ -77,6 +88,7 @@ Every plate is a small module in `src/js/scenes/` that exports `(host, { reduced
 | `puzzle` | Word search generated from a vocab list, then solved word by word |
 | `softeng` | Linear search traced through a flowchart, NESA pseudocode and an array |
 | `entcomp` | A small data set collected, cleaned and charted, with the tallest bar called out as the insight |
+| `comptech` | A robot reads a sensor, decides and drives, shown as a live Input → Process → Output chart and pseudocode; click the grid to place walls and it re-plans with BFS |
 | `constellation` | Default for new repos: a constellation seeded from the repo name |
 
 ## Local preview
