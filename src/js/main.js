@@ -342,6 +342,7 @@ function initCountUp() {
 
 // Optional layers: if one fails to load, the page still works.
 import('./motion.js').then((m) => m.default({ reduced })).catch((e) => console.warn('motion layer unavailable', e));
+import('./texture.js').then((m) => m.default({ reduced })).catch((e) => console.warn('texture layer unavailable', e));
 import('./toybox.js').then((m) => m.default({ reduced })).catch((e) => console.warn('toybox unavailable', e));
 
 initReveal();

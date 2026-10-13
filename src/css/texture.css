@@ -1,0 +1,109 @@
+/* ==========================================================================
+   Texture: film grain, frosted glass and glitch bursts.
+   Everything here is decoration. Under reduced motion the grain holds still
+   and the glitches never fire.
+   ========================================================================== */
+
+:root { --fx-grain: none; }
+
+/* The old static noise on body::after is replaced by the animated layer below. */
+body::after { display: none; }
+
+/* ------------------------------------------------------------------ grain */
+
+.fx-grain {
+  position: fixed;
+  inset: -50%;
+  z-index: 100;
+  pointer-events: none;
+  opacity: 0.16;
+  background-image: var(--fx-grain);
+  background-size: 160px 160px;
+  animation: fx-grain 1s steps(1) infinite;
+}
+@keyframes fx-grain {
+  0%   { transform: translate3d(0, 0, 0); }
+  10%  { transform: translate3d(-5%, -9%, 0); }
+  20%  { transform: translate3d(-12%, 4%, 0); }
+  30%  { transform: translate3d(7%, -14%, 0); }
+  40%  { transform: translate3d(-5%, 15%, 0); }
+  50%  { transform: translate3d(-12%, 8%, 0); }
+  60%  { transform: translate3d(14%, 0, 0); }
+  70%  { transform: translate3d(0, 11%, 0); }
+  80%  { transform: translate3d(3%, 15%, 0); }
+  90%  { transform: translate3d(-10%, 6%, 0); }
+}
+
+/* ------------------------------------------------------------------ frosted glass */
+
+.hud, .tier, .bundle, .lanes, .toybox-stage {
+  -webkit-backdrop-filter: blur(14px) saturate(150%);
+  backdrop-filter: blur(14px) saturate(150%);
+  box-shadow: inset 0 1px 0 rgba(255, 255, 255, 0.12), inset 0 -1px 0 rgba(255, 255, 255, 0.03);
+}
+.lanes { box-shadow: none; }
+
+/* ------------------------------------------------------------------ plate overlay: scanlines, grain and a sweep */
+
+.fx-plate {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  overflow: hidden;
+  pointer-events: none;
+  opacity: 0.55;
+  mix-blend-mode: overlay;
+  background:
+    repeating-linear-gradient(0deg, rgba(0, 0, 0, 0.28) 0 1px, transparent 1px 3px),
+    var(--fx-grain) 0 0 / 160px 160px;
+}
+.fx-plate::after {
+  content: '';
+  position: absolute;
+  inset: 0 0 auto;
+  height: 22%;
+  background: linear-gradient(transparent, rgba(255, 255, 255, 0.5), transparent);
+  transform: translateY(-120%);
+  animation: fx-sweep 2.4s linear infinite paused;
+}
+.plate-frame:hover .fx-plate::after { animation-play-state: running; }
+@keyframes fx-sweep { to { transform: translateY(520%); } }
+
+/* ------------------------------------------------------------------ glitch bursts */
+
+.fx-glitch { animation: fx-glitch 0.46s steps(1) 1; }
+@keyframes fx-glitch {
+  0%   { transform: none; text-shadow: none; clip-path: inset(0); }
+  12%  { transform: translate(-3px, 1px) skewX(-5deg); text-shadow: 3px 0 rgba(255, 40, 100, 0.85), -3px 0 rgba(40, 240, 255, 0.85); clip-path: inset(8% 0 58% 0); }
+  26%  { transform: translate(4px, -1px) skewX(3deg); text-shadow: -3px 0 rgba(255, 40, 100, 0.85), 3px 0 rgba(40, 240, 255, 0.85); clip-path: inset(55% 0 10% 0); }
+  40%  { transform: translate(-2px, 0); text-shadow: 2px 0 rgba(255, 40, 100, 0.7), -2px 0 rgba(40, 240, 255, 0.7); clip-path: inset(0); }
+  54%  { transform: translate(5px, 1px) skewX(-6deg); text-shadow: -4px 0 rgba(255, 40, 100, 0.85), 4px 0 rgba(40, 240, 255, 0.85); clip-path: inset(28% 0 36% 0); }
+  70%  { transform: translate(-1px, -1px); text-shadow: 2px 0 rgba(255, 40, 100, 0.6), -2px 0 rgba(40, 240, 255, 0.6); clip-path: inset(0 0 72% 0); }
+  86%  { transform: translate(2px, 0); text-shadow: -1px 0 rgba(255, 40, 100, 0.5), 1px 0 rgba(40, 240, 255, 0.5); clip-path: inset(0); }
+  100% { transform: none; text-shadow: none; clip-path: inset(0); }
+}
+.brand:hover span { animation: fx-glitch 0.46s steps(1) infinite; }
+
+/* The hero's dots are transparent, so a real red/cyan split works on them. */
+.fx-split-dots { animation: fx-split-dots 0.3s steps(1) 1; }
+@keyframes fx-split-dots {
+  0%   { filter: drop-shadow(4px 0 0 rgba(255, 40, 100, 0.8)) drop-shadow(-4px 0 0 rgba(40, 240, 255, 0.8)); transform: translateX(2px); }
+  33%  { filter: drop-shadow(-5px 0 0 rgba(255, 40, 100, 0.8)) drop-shadow(5px 0 0 rgba(40, 240, 255, 0.8)); transform: translateX(-3px); }
+  66%  { filter: drop-shadow(2px 0 0 rgba(255, 40, 100, 0.6)) drop-shadow(-2px 0 0 rgba(40, 240, 255, 0.6)); transform: none; }
+  100% { filter: none; transform: none; }
+}
+
+/* Plates are opaque, so they flicker in hue and jump sideways instead. */
+.fx-split-plate { animation: fx-split-plate 0.3s steps(1) 1; }
+@keyframes fx-split-plate {
+  0%   { filter: hue-rotate(35deg) saturate(1.6) contrast(1.15); transform: translateX(3px); }
+  30%  { filter: hue-rotate(-30deg) saturate(1.5); transform: translateX(-4px); clip-path: inset(0 0 62% 0); }
+  60%  { filter: hue-rotate(15deg) saturate(1.3); transform: translateX(2px); clip-path: inset(42% 0 20% 0); }
+  100% { filter: none; transform: none; clip-path: inset(0); }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .fx-grain { animation: none; inset: 0; }
+  .fx-plate::after { display: none; }
+  .fx-glitch, .brand:hover span, .fx-split-dots, .fx-split-plate { animation: none; }
+}
