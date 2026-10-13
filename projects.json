@@ -365,6 +365,36 @@
         "model": "free",
         "note": "Free forever for every NSW student."
       }
+    },
+    {
+      "repo": "Computing-Technology-7-10",
+      "group": "work",
+      "title": "CompTech Notes",
+      "kind": "Study guide",
+      "subject": "Computing Technology · Y7–10",
+      "scene": "comptech",
+      "accent": "#ff7a59",
+      "tagline": "The Computing Technology 7–10 syllabus, dot point by dot point, for Years 7 to 10.",
+      "description": "A free study guide for NSW Computing Technology in Years 7 to 10. Every page follows NESA's own order, with each dot point quoted verbatim, its outcome codes listed and notes written at the depth its command verb asks for. Years 7 and 8 get the main idea in plain language, and a \"Years 9–10: go further\" box adds depth for older students. It covers all 246 mainstream dot points, plus a full set of Life Skills pages, a course toolkit, a project guide and a glossary.",
+      "features": [
+        "All 246 mainstream dot points across six focus areas, plus 201 Life Skills dot points",
+        "Years 9–10 \"go further\" boxes that a single switch can hide",
+        "Try-it labs: flowcharts, pseudocode, SQL practice and a worked example project",
+        "Quizzes, glossary popovers and reading progress, with no libraries"
+      ],
+      "stack": [
+        "HTML",
+        "CSS",
+        "JavaScript",
+        "Python"
+      ],
+      "cta": "Read the notes",
+      "caption": "A tiny robot reads an input, decides, and drives an output. Click the grid to put a wall in its way.",
+      "alt": "A small robot on a grid following a path while an input, process and output chart lights up in step with what it senses and does.",
+      "pricing": {
+        "model": "free",
+        "note": "Free forever for every NSW student."
+      }
     }
   ],
   "bundle": {

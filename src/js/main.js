@@ -215,14 +215,14 @@ async function initHero() {
    Project scenes: loaded lazily, and only animated while on screen.
    ========================================================================== */
 
-const KNOWN_SCENES = new Set(['truss', 'terms', 'noise', 'band6', 'maths', 'puzzle', 'softeng', 'entcomp', 'constellation']);
+const KNOWN_SCENES = new Set(['truss', 'terms', 'noise', 'band6', 'maths', 'puzzle', 'softeng', 'entcomp', 'comptech', 'constellation']);
 const instances = new Map();
 const visible = new Set();
 
 async function mountScene(host) {
   if (instances.has(host)) return instances.get(host);
   const name = KNOWN_SCENES.has(host.dataset.scene) ? host.dataset.scene : 'constellation';
-  const promise = import(`./scenes/${name}.js`).then((mod) => {
+  const promise = import(`./scenes/${name}.js`).catch(() => import('./scenes/constellation.js')).then((mod) => {
     const accent = getComputedStyle(host).getPropertyValue('--accent').trim();
     return mod.default(host, { reduced, accent, seed: host.dataset.seed || name });
   });
@@ -339,6 +339,10 @@ function initCountUp() {
     requestAnimationFrame(tick);
   }
 }
+
+// Optional layers: if one fails to load, the page still works.
+import('./motion.js').then((m) => m.default({ reduced })).catch((e) => console.warn('motion layer unavailable', e));
+import('./toybox.js').then((m) => m.default({ reduced })).catch((e) => console.warn('toybox unavailable', e));
 
 initReveal();
 initTopbar();

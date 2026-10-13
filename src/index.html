@@ -20,6 +20,8 @@
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wght@12..96,800&family=Caveat:wght@600&family=Courier+Prime&family=Fraunces:ital,opsz,wght@0,9..144,300..900;1,9..144,300..700&family=Instrument+Sans:wght@400..600&family=JetBrains+Mono:wght@400;500;600&display=swap">
   <link rel="stylesheet" href="css/site.css">
+  <link rel="stylesheet" href="css/motion.css">
+  <link rel="stylesheet" href="css/toybox.css">
   <script>document.documentElement.classList.replace('no-js', 'js');</script>
   <script type="module" src="js/main.js"></script>
 </head>
@@ -60,6 +62,21 @@
         </dl>
       </div>
       <p class="hero-hint" aria-hidden="true"><kbd>Move</kbd> to disturb the letters <span class="sep">·</span> <kbd>Click</kbd> to scatter them</p>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track"><!-- @MARQUEE --></div>
+    </div>
+
+    <section class="toybox" id="toybox" aria-labelledby="toybox-h">
+      <div class="toybox-head" data-reveal>
+        <p class="label">Toybox</p>
+        <h2 id="toybox-h">Pick one up. <em>Throw it.</em></h2>
+        <p class="toybox-hint">Every project is a block. Drag them, fling them, then click one to jump to its plate.</p>
+      </div>
+      <div class="toybox-stage" data-toybox="@@TOYBOX_DATA@@">
+        <noscript><p>Turn on JavaScript to play with the toybox. The full list is just below.</p></noscript>
+      </div>
     </section>
 
     <section class="catalogue" id="catalogue" aria-labelledby="cat-h">
