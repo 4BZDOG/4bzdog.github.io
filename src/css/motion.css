@@ -142,7 +142,7 @@
   font: 500 11px/1 var(--mono);
   letter-spacing: 0.16em;
   text-transform: uppercase;
-  color: var(--dim);
+  color: #8a8c9f;
 }
 
 /* ------------------------------------------------------------------ atmosphere drift */
