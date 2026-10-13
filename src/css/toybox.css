@@ -1,1 +1,2 @@
-/* Toybox */
+/* Toybox: hidden until the real component lands. */
+.toybox { display: none; }
