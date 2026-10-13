@@ -1,2 +1,131 @@
-/* Toybox: hidden until the real component lands. */
-.toybox { display: none; }
+/* ==========================================================================
+   Toybox: every project as a block you can pick up and throw.
+   ========================================================================== */
+
+.toybox {
+  max-width: var(--maxw);
+  margin: 0 auto;
+  padding: clamp(56px, 9vw, 120px) var(--gutter) 0;
+}
+.toybox-head { max-width: 900px; }
+.toybox-head h2 {
+  margin: 14px 0 0;
+  font: 350 clamp(34px, 5vw, 64px)/1.04 var(--serif);
+  font-variation-settings: 'opsz' 144;
+  letter-spacing: -0.03em;
+}
+.toybox-head h2 em { font-style: italic; font-weight: 300; color: var(--muted); }
+.toybox-hint { margin: 16px 0 0; max-width: 56ch; color: var(--muted); font-size: 17px; }
+
+/* Readout on the left, controls on the right. */
+.toybox-bar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 10px 16px;
+  margin: clamp(24px, 3.5vw, 36px) 0 12px;
+}
+.toybox-readout { min-height: 1.4em; font-variant-numeric: tabular-nums; }
+.toybox-readout::before {
+  content: '';
+  display: inline-block;
+  width: 6px; height: 6px;
+  margin: 0 10px 1px 0;
+  border-radius: 50%;
+  background: #7be495;
+  box-shadow: 0 0 10px rgba(123, 228, 149, 0.7);
+}
+.toybox-tools { display: flex; gap: 8px; }
+.toybox-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 14px 0 12px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--text);
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: transform 0.25s var(--ease), border-color 0.25s, color 0.25s, background-color 0.25s;
+}
+.toybox-btn .i { width: 15px; height: 15px; transition: transform 0.35s var(--ease); }
+.toybox-btn:hover { border-color: rgba(236, 230, 216, 0.4); background: rgba(255, 255, 255, 0.05); }
+.toybox-btn:active { transform: translateY(1px); }
+.toybox-shake:hover .i { animation: toybox-wiggle 0.4s var(--ease); }
+.toybox-reset:hover .i { transform: rotate(-200deg); }
+@keyframes toybox-wiggle {
+  25% { transform: rotate(-14deg); }
+  60% { transform: rotate(12deg); }
+}
+
+/* The stage: engineering paper, a ruled pair of walls and a hatched floor. */
+.toybox-stage {
+  position: relative;
+  height: clamp(420px, 44vw, 560px);
+  border: 1px solid var(--line-2);
+  border-radius: var(--radius);
+  overflow: hidden;
+  background:
+    radial-gradient(80% 60% at 50% 100%, rgba(143, 130, 255, 0.07), transparent 70%),
+    linear-gradient(rgba(236, 230, 216, 0.045) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(90deg, rgba(236, 230, 216, 0.045) 1px, transparent 1px) 0 0 / 24px 24px,
+    linear-gradient(rgba(236, 230, 216, 0.05) 1px, transparent 1px) 0 0 / 120px 120px,
+    linear-gradient(90deg, rgba(236, 230, 216, 0.05) 1px, transparent 1px) 0 0 / 120px 120px,
+    var(--bg-2);
+  /* Vertical swipes always scroll the page; see the note at the top of toybox.js. */
+  touch-action: pan-y;
+  -webkit-tap-highlight-color: transparent;
+}
+.toybox-stage::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  background:
+    /* floor: a hatched strip with a bright top edge */
+    linear-gradient(rgba(236, 230, 216, 0.28), rgba(236, 230, 216, 0.28)) left bottom 12px / 100% 1px no-repeat,
+    repeating-linear-gradient(-45deg, rgba(236, 230, 216, 0.12) 0 1px, transparent 1px 7px) left bottom / 100% 12px no-repeat,
+    /* walls: ruler ticks, longer every fifth */
+    repeating-linear-gradient(rgba(236, 230, 216, 0.22) 0 1px, transparent 1px 48px) left top / 10px calc(100% - 12px) no-repeat,
+    repeating-linear-gradient(rgba(236, 230, 216, 0.14) 0 1px, transparent 1px 9.6px) left top / 5px calc(100% - 12px) no-repeat,
+    repeating-linear-gradient(rgba(236, 230, 216, 0.22) 0 1px, transparent 1px 48px) right top / 10px calc(100% - 12px) no-repeat,
+    repeating-linear-gradient(rgba(236, 230, 216, 0.14) 0 1px, transparent 1px 9.6px) right top / 5px calc(100% - 12px) no-repeat;
+}
+.toybox-canvas {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  user-select: none;
+}
+.toybox-canvas.is-grabbing { cursor: grabbing !important; }
+.toybox-stage.is-reduced { min-height: 300px; }
+.toybox-stage noscript p {
+  position: absolute;
+  inset: 0;
+  display: grid;
+  place-items: center;
+  margin: 0;
+  padding: 24px;
+  text-align: center;
+  color: var(--muted);
+  font: 500 12px/1.6 var(--mono);
+  letter-spacing: 0.08em;
+}
+
+@media (max-width: 640px) {
+  .toybox-stage { height: 440px; border-radius: 12px; }
+  .toybox-btn { height: 34px; padding: 0 12px 0 10px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .toybox-btn, .toybox-btn .i { transition: none; animation: none !important; }
+  .toybox-readout::before { background: var(--dim); box-shadow: none; }
+}
