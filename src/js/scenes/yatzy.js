@@ -131,7 +131,10 @@ export default function yatzy(host, { reduced, accent, seed }) {
   function reroll(rng) {
     rollDice(keepIdx().filter((i) => !held[i]), rng);
     rolls--;
-    if (rolls === 0) stamp = TARGETS[aim].hit(counts(dice)) ? 'HIT' : 'MISS';
+    if (rolls === 0) {
+      stamp = TARGETS[aim].hit(counts(dice)) ? 'HIT' : 'MISS';
+      held = Array(N).fill(false); // the turn is over; holds no longer mean anything
+    }
     refresh();
   }
 

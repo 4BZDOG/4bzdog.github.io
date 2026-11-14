@@ -373,7 +373,7 @@ function rank(items, q) {
 }
 
 /* Title prefix beats word start, which beats substring, which beats a loose
-   subsequence. The subsequence tier is what keeps "mat" forgiving. */
+   subsequence of the title; then the kind, subject and tagline by word or substring. */
 function score(item, q) {
   const t = item.lt;
   if (t.startsWith(q)) return 100;
@@ -382,7 +382,6 @@ function score(item, q) {
   if (isSubsequence(q, t)) return 40;
   if (item.lr.split(WORD_BREAK).some((w) => w && w.startsWith(q))) return 30;
   if (item.lr.includes(q)) return 20;
-  if (isSubsequence(q, `${t} ${item.lr}`)) return 10;
   return 0;
 }
 
@@ -483,6 +482,18 @@ function buildPill(ctx) {
 
   prev.addEventListener('click', () => stepBy(ctx, -1));
   next.addEventListener('click', () => stepBy(ctx, 1));
+
+  // The pill shows while the page is moving and steps aside once it settles,
+  // so it never sits on top of a plate's buttons. Hover or focus keeps it up.
+  let restT = 0;
+  const wake = () => {
+    pill.classList.remove('nv-pill--rest');
+    clearTimeout(restT);
+    restT = setTimeout(() => pill.classList.add('nv-pill--rest'), 2600);
+  };
+  window.addEventListener('scroll', wake, { passive: true });
+  pill.addEventListener('pointermove', wake);
+  wake();
 
   ctx.subs.push((index) => {
     const item = ctx.projects[index];

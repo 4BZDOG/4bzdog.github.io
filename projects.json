@@ -145,6 +145,37 @@
       }
     },
     {
+      "repo": "probabil-yatzy",
+      "group": "play",
+      "title": "Probabil-Yatzy",
+      "kind": "Game",
+      "subject": "Maths · Probability",
+      "scene": "yatzy",
+      "accent": "#ff5d73",
+      "tagline": "A dice game with live odds, so every reroll is a probability decision.",
+      "description": "A browser dice game in the style of Yatzy. Each turn gives you three rolls, and you can hold any dice between them. The game shows the odds of finishing each open category as you go, and a hold advisor suggests which dice to keep. Play solo, head to head, or against the Cortex AI opponent.",
+      "features": [
+        "Live odds for each open category as you roll and hold",
+        "A hold advisor that suggests which dice to keep",
+        "A probability lab for testing a hold before you commit",
+        "Solo, two-player or against Cortex, with a local top ten"
+      ],
+      "stack": [
+        "React 18",
+        "Tailwind CSS",
+        "Web Workers",
+        "KaTeX",
+        "Web Audio"
+      ],
+      "cta": "Roll the dice",
+      "caption": "Five dice and the exact best-play odds of four hands. Click a die to hold it, or click the table to roll again.",
+      "alt": "Five dice, some glowing with HOLD tags, above four horizontal bars showing the chance of completing each hand.",
+      "pricing": {
+        "model": "free",
+        "note": "Free to play. Scores stay on your own device."
+      }
+    },
+    {
       "repo": "HSC-Writing-Master",
       "group": "work",
       "title": "Band 6",

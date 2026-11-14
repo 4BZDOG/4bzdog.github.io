@@ -322,6 +322,13 @@
   transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0s;
 }
 
+.nv-pill--on.nv-pill--rest:not(:hover):not(:focus-within) {
+  opacity: 0;
+  transform: translateY(10px);
+  pointer-events: none;
+  transition: opacity 0.5s var(--ease), transform 0.5s var(--ease);
+}
+
 .nv-pill-step {
   flex: none;
   width: 36px;
@@ -453,6 +460,7 @@
   .nv-head { padding-left: 16px; }
   .nv-input { font-size: 18px; }
   .nv-opt { padding: 12px; }
+  .nv-opt-kind { display: none; }
   .nv-foot { display: none; }
 
   .nv-pill { bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
@@ -497,9 +505,11 @@ body.nv-lock { overflow: hidden; }
   html { scroll-behavior: auto; }
 }
 
-/* A jump lands on the plate itself, so the focus ring needs room around the whole plate. */
-.exhibit[tabindex='-1']:focus-visible,
-section[tabindex='-1']:focus-visible,
-main[tabindex='-1']:focus-visible {
-  outline-offset: 12px;
+/* A jump moves focus onto a plate or section, which is a container and not a
+   control. A ring around a 900px plate reads as a stray line under the topbar,
+   so the programmatic focus target shows none. Every control keeps the global ring. */
+.exhibit[tabindex='-1']:focus,
+section[tabindex='-1']:focus,
+main[tabindex='-1']:focus {
+  outline: none;
 }
