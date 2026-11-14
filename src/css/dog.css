@@ -1,0 +1,88 @@
+/* ==========================================================================
+   Dot-matrix dog: a pixel mascot that walks the top edge as the scroll marker.
+   dog.js draws the sprite; this file places the element and styles its bubbles.
+   The root is pointer-events: none, so only the dog's own 48x36 box is clickable.
+   ========================================================================== */
+
+.dg-root {
+  --dog-accent: #ece6d8;
+  position: fixed;
+  left: 0;
+  top: 2px;
+  z-index: 70;
+  width: 48px;
+  height: 36px;
+  pointer-events: none;
+  will-change: transform;
+}
+.dg-root[hidden],
+.dg-probe[hidden] { display: none; }
+
+.dg-dog {
+  display: block;
+  width: 48px;
+  height: 36px;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  border-radius: 6px;
+  background: none;
+  color: inherit;
+  cursor: pointer;
+  pointer-events: auto;
+  -webkit-tap-highlight-color: transparent;
+}
+
+.dg-canvas {
+  width: 48px;
+  height: 36px;
+  image-rendering: pixelated;
+  image-rendering: crisp-edges;
+}
+.dg-root.is-back .dg-canvas { transform: scaleX(-1); }
+
+/* Bubbles sit beside the dog and flip to its left near the right edge. */
+.dg-say,
+.dg-tip {
+  position: absolute;
+  top: 6px;
+  left: calc(100% + 8px);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translateY(-3px);
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.dg-root.is-left .dg-say,
+.dg-root.is-left .dg-tip { left: auto; right: calc(100% + 8px); }
+
+.dg-say {
+  padding: 6px 10px 7px;
+  border: 1px solid var(--line-2);
+  border-radius: 12px 12px 12px 3px;
+  background: var(--panel);
+  color: var(--text);
+  font: italic 500 15px/1 var(--serif);
+}
+.dg-root.is-left .dg-say { border-radius: 12px 12px 3px 12px; }
+.dg-say.is-on { opacity: 1; transform: none; }
+
+.dg-tip {
+  padding: 6px 10px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: var(--panel);
+  color: var(--muted);
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .dg-dog:hover ~ .dg-tip { opacity: 1; transform: none; }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .dg-say,
+  .dg-tip { transition: none; transform: none; }
+}

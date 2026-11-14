@@ -1,0 +1,505 @@
+/* ==========================================================================
+   Navigation layer. Styles for nav.js: the Fetch palette, the wayfinder rail,
+   and the now-viewing pill. Every class is prefixed nv-. Layers: the rail,
+   pill and button sit at z 80, the palette at 90, and the film grain at 100
+   still covers all of them.
+   ========================================================================== */
+
+/* ------------------------------------------------------------------ fetch palette */
+
+.nv-fetch {
+  position: fixed;
+  inset: 0;
+  z-index: 90;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.18s var(--ease), visibility 0s linear 0.18s;
+}
+.nv-fetch.is-open {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.18s var(--ease), visibility 0s;
+}
+
+.nv-scrim {
+  position: absolute;
+  inset: 0;
+  background: rgba(5, 6, 10, 0.62);
+  -webkit-backdrop-filter: blur(6px) saturate(1.1);
+  backdrop-filter: blur(6px) saturate(1.1);
+}
+
+.nv-dialog {
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: clamp(72px, 16vh, 150px);
+  margin: 0 auto;
+  width: min(560px, calc(100vw - 32px));
+  max-height: min(70vh, 640px);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  border: 1px solid var(--line-2);
+  border-radius: 16px;
+  background: color-mix(in srgb, var(--panel) 96%, transparent);
+  box-shadow: 0 30px 80px -24px rgba(0, 0, 0, 0.85), inset 0 1px 0 rgba(236, 230, 216, 0.04);
+  opacity: 0;
+  transform: translateY(10px);
+  transition: opacity 0.2s var(--ease), transform 0.22s var(--ease);
+}
+.nv-fetch.is-open .nv-dialog {
+  opacity: 1;
+  transform: none;
+}
+
+.nv-head {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 4px 8px 4px 18px;
+  border-bottom: 1px solid var(--line);
+}
+.nv-head:focus-within { box-shadow: inset 0 -1px 0 var(--text); }
+.nv-glyph {
+  flex: none;
+  font: 500 14px/1 var(--mono);
+  color: var(--dim);
+}
+.nv-head:focus-within .nv-glyph { color: var(--text); }
+.nv-input {
+  flex: 1;
+  min-width: 0;
+  height: 58px;
+  padding: 0;
+  border: 0;
+  background: transparent;
+  color: var(--text);
+  font: 400 20px/1 var(--serif);
+  font-variation-settings: 'opsz' 36;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.nv-input:focus { outline: none; }
+.nv-input::placeholder { color: var(--dim); font-style: italic; }
+
+.nv-close {
+  flex: none;
+  height: 32px;
+  padding: 0 12px;
+  border: 1px solid var(--line-2);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--muted);
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: color 0.2s, border-color 0.2s, background-color 0.2s;
+}
+.nv-close:hover { color: var(--text); border-color: var(--dim); background: rgba(255, 255, 255, 0.04); }
+
+.nv-list {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: auto;
+  overscroll-behavior: contain;
+  padding: 6px 8px 8px;
+}
+
+.nv-group {
+  padding: 14px 12px 6px;
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+.nv-group:first-child { padding-top: 8px; }
+
+.nv-opt {
+  position: relative;
+  display: grid;
+  grid-template-columns: 28px 10px minmax(0, 1fr) auto;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 12px;
+  border-radius: 10px;
+  color: var(--text);
+  cursor: pointer;
+  transition: background-color 0.15s, color 0.15s;
+}
+.nv-opt::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 22%;
+  bottom: 22%;
+  width: 2px;
+  border-radius: 2px;
+  background: var(--accent, var(--text));
+  opacity: 0;
+  transition: opacity 0.15s;
+}
+.nv-opt.is-active {
+  background: color-mix(in srgb, var(--accent, var(--text)) 12%, transparent);
+}
+.nv-opt.is-active::before { opacity: 1; }
+.nv-opt[data-place].is-active { background: rgba(236, 230, 216, 0.06); }
+.nv-opt[data-place]::before { background: var(--text); }
+
+.nv-opt-num {
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.08em;
+  color: var(--dim);
+  font-variant-numeric: tabular-nums;
+}
+.nv-opt-swatch {
+  width: 10px;
+  height: 10px;
+  border-radius: 2px;
+  background: var(--accent, var(--text));
+}
+.nv-opt[data-place] .nv-opt-swatch {
+  background: transparent;
+  border: 1px solid var(--line-2);
+}
+.nv-opt-title {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: 400 19px/1.2 var(--serif);
+  font-variation-settings: 'opsz' 36;
+}
+.nv-opt-kind {
+  font: 500 10px/1 var(--mono);
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  color: var(--dim);
+  white-space: nowrap;
+}
+.nv-opt.is-active .nv-opt-kind { color: var(--muted); }
+
+.nv-empty {
+  margin: 0;
+  padding: 28px 18px 32px;
+  text-align: center;
+  font: italic 400 18px/1.4 var(--serif);
+  color: var(--muted);
+}
+.nv-empty[hidden] { display: none; }
+
+.nv-foot {
+  padding: 10px 16px;
+  border-top: 1px solid var(--line);
+  font: 500 10px/1.4 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--dim);
+  white-space: nowrap;
+}
+
+/* ------------------------------------------------------------------ wayfinder rail */
+
+.nv-rail {
+  position: fixed;
+  right: 12px;
+  top: 50%;
+  translate: 0 -50%;
+  z-index: 80;
+  display: none;
+  flex-direction: column;
+  align-items: flex-end;
+  visibility: hidden;
+  opacity: 0;
+  transition: opacity 0.4s var(--ease), visibility 0s linear 0.4s;
+}
+.nv-rail--on {
+  visibility: visible;
+  opacity: 1;
+  transition: opacity 0.4s var(--ease), visibility 0s;
+}
+
+.nv-tick {
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 28px;
+  height: 14px;
+  text-decoration: none;
+}
+.nv-tick--gap { margin-top: 16px; }
+.nv-tick::before {
+  content: '';
+  width: 10px;
+  height: 2px;
+  border-radius: 2px;
+  background: var(--dim);
+  opacity: 0.5;
+  transition: width 0.35s var(--ease), height 0.35s var(--ease), background-color 0.3s, opacity 0.3s, box-shadow 0.3s;
+}
+.nv-tick:hover::before,
+.nv-tick:focus-visible::before {
+  width: 16px;
+  background: var(--text);
+  opacity: 1;
+}
+.nv-tick.is-active::before {
+  width: 24px;
+  height: 3px;
+  background: var(--accent, var(--text));
+  opacity: 1;
+  box-shadow: 0 0 12px var(--accent, var(--text));
+}
+
+.nv-tick-label {
+  position: absolute;
+  right: calc(100% + 12px);
+  top: 50%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 5px;
+  padding: 8px 12px;
+  border: 1px solid var(--line-2);
+  border-radius: 10px;
+  background: color-mix(in srgb, var(--panel) 92%, transparent);
+  box-shadow: 0 12px 30px -14px rgba(0, 0, 0, 0.8);
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transform: translate(8px, -50%);
+  transition: opacity 0.22s var(--ease), transform 0.22s var(--ease);
+}
+.nv-tick:hover .nv-tick-label,
+.nv-tick:focus-visible .nv-tick-label {
+  opacity: 1;
+  transform: translate(0, -50%);
+}
+.nv-tick-title {
+  font: 400 16px/1 var(--serif);
+  font-variation-settings: 'opsz' 24;
+  color: var(--text);
+}
+.nv-tick-kind {
+  font: 500 9px/1 var(--mono);
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--dim);
+}
+
+/* ------------------------------------------------------------------ now-viewing pill */
+
+.nv-pill {
+  position: fixed;
+  left: 50%;
+  bottom: calc(20px + env(safe-area-inset-bottom, 0px));
+  z-index: 80;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  width: max-content;
+  max-width: calc(100vw - 32px);
+  height: 44px;
+  padding: 3px;
+  translate: -50% 0;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: color-mix(in srgb, var(--panel) 85%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  backdrop-filter: blur(14px) saturate(1.3);
+  box-shadow: 0 16px 40px -18px rgba(0, 0, 0, 0.8);
+  visibility: hidden;
+  opacity: 0;
+  transform: translateY(12px);
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0s linear 0.3s;
+}
+.nv-pill--on {
+  visibility: visible;
+  opacity: 1;
+  transform: none;
+  transition: opacity 0.3s var(--ease), transform 0.3s var(--ease), visibility 0s;
+}
+
+.nv-pill-step {
+  flex: none;
+  width: 36px;
+  height: 36px;
+  padding: 0;
+  border: 0;
+  border-radius: 50%;
+  background: transparent;
+  color: var(--muted);
+  font: 400 20px/1 var(--mono);
+  cursor: pointer;
+  transition: color 0.2s, background-color 0.2s;
+}
+.nv-pill-step:hover:not(:disabled) { color: var(--text); background: rgba(255, 255, 255, 0.06); }
+.nv-pill-step:disabled { opacity: 0.3; cursor: default; }
+
+.nv-pill-now {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  min-width: 0;
+  flex: 0 1 auto;
+  padding: 0 8px;
+}
+.nv-pill-dot {
+  flex: none;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent, var(--text));
+  box-shadow: 0 0 12px var(--accent, var(--text));
+}
+.nv-pill-num {
+  flex: none;
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.12em;
+  color: var(--dim);
+}
+.nv-pill-title {
+  min-width: 0;
+  overflow: hidden;
+  white-space: nowrap;
+  text-overflow: ellipsis;
+  font: 400 16px/1 var(--serif);
+  font-variation-settings: 'opsz' 24;
+  color: var(--text);
+}
+
+.nv-pill-fetch {
+  flex: none;
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 36px;
+  padding: 0 8px 0 14px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  font: 500 11px/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.nv-pill-fetch:hover { border-color: color-mix(in srgb, var(--accent, var(--text)) 60%, transparent); background: rgba(255, 255, 255, 0.06); }
+.nv-pill-fetch kbd { font-size: 9px; padding: 2px 5px 3px; }
+
+/* Round Fetch button for small screens when no project is in view. */
+.nv-fab {
+  display: none;
+  position: fixed;
+  right: 16px;
+  bottom: calc(16px + env(safe-area-inset-bottom, 0px));
+  z-index: 80;
+  place-items: center;
+  width: 52px;
+  height: 52px;
+  padding: 0;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  background: color-mix(in srgb, var(--panel) 90%, transparent);
+  -webkit-backdrop-filter: blur(14px) saturate(1.3);
+  backdrop-filter: blur(14px) saturate(1.3);
+  box-shadow: 0 14px 34px -14px rgba(0, 0, 0, 0.8);
+  color: var(--text);
+  cursor: pointer;
+  opacity: 0;
+  transform: scale(0.9);
+  pointer-events: none;
+  transition: opacity 0.25s var(--ease), transform 0.25s var(--ease);
+}
+.nv-fab svg { width: 20px; height: 20px; }
+.nv-fab--on {
+  opacity: 1;
+  transform: none;
+  pointer-events: auto;
+}
+
+/* ------------------------------------------------------------------ breakpoints */
+
+@media (min-width: 1100px) and (hover: hover) and (pointer: fine) {
+  .nv-rail { display: flex; }
+}
+
+@media (max-width: 640px) {
+  .nv-fab { display: grid; }
+
+  .nv-dialog {
+    top: auto;
+    bottom: 0;
+    width: 100%;
+    max-height: 80vh;
+    border-radius: 16px 16px 0 0;
+    border-bottom: 0;
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+    transform: translateY(100%);
+  }
+  .nv-fetch.is-open .nv-dialog { transform: none; }
+  .nv-dialog::before {
+    content: '';
+    display: block;
+    width: 36px;
+    height: 4px;
+    margin: 8px auto 0;
+    border-radius: 2px;
+    background: var(--line-2);
+  }
+  .nv-head { padding-left: 16px; }
+  .nv-input { font-size: 18px; }
+  .nv-opt { padding: 12px; }
+  .nv-foot { display: none; }
+
+  .nv-pill { bottom: calc(14px + env(safe-area-inset-bottom, 0px)); }
+  .nv-pill-step { width: 32px; height: 36px; }
+  .nv-pill-fetch { padding: 0 12px; }
+  .nv-pill-fetch kbd { display: none; }
+  .nv-pill-now { gap: 8px; }
+}
+
+@media (hover: none) {
+  .nv-foot { display: none; }
+  .nv-tick-label { display: none; }
+}
+
+/* ------------------------------------------------------------------ motion */
+
+html.nv-still { scroll-behavior: auto; }
+body.nv-lock { overflow: hidden; }
+
+.nv-still .nv-fetch,
+.nv-still .nv-fetch *,
+.nv-still .nv-rail,
+.nv-still .nv-rail *,
+.nv-still .nv-pill,
+.nv-still .nv-pill *,
+.nv-still .nv-fab {
+  transition: none !important;
+  animation: none !important;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .nv-fetch,
+  .nv-fetch *,
+  .nv-rail,
+  .nv-rail *,
+  .nv-pill,
+  .nv-pill *,
+  .nv-fab {
+    transition: none !important;
+    animation: none !important;
+  }
+  html { scroll-behavior: auto; }
+}
+
+/* A jump lands on the plate itself, so the focus ring needs room around the whole plate. */
+.exhibit[tabindex='-1']:focus-visible,
+section[tabindex='-1']:focus-visible,
+main[tabindex='-1']:focus-visible {
+  outline-offset: 12px;
+}
