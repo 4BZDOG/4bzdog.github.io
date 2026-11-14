@@ -215,7 +215,7 @@ async function initHero() {
    Project scenes: loaded lazily, and only animated while on screen.
    ========================================================================== */
 
-const KNOWN_SCENES = new Set(['truss', 'terms', 'noise', 'band6', 'maths', 'puzzle', 'softeng', 'entcomp', 'comptech', 'constellation']);
+const KNOWN_SCENES = new Set(['truss', 'terms', 'noise', 'band6', 'maths', 'puzzle', 'softeng', 'entcomp', 'comptech', 'cluck', 'yatzy', 'constellation']);
 const instances = new Map();
 const visible = new Set();
 
@@ -343,6 +343,8 @@ function initCountUp() {
 // Optional layers: if one fails to load, the page still works.
 import('./motion.js').then((m) => m.default({ reduced })).catch((e) => console.warn('motion layer unavailable', e));
 import('./texture.js').then((m) => m.default({ reduced })).catch((e) => console.warn('texture layer unavailable', e));
+import('./nav.js').then((m) => m.default({ reduced })).catch((e) => console.warn('navigation layer unavailable', e));
+import('./dog.js').then((m) => m.default({ reduced })).catch((e) => console.warn('mascot unavailable', e));
 import('./toybox.js').then((m) => m.default({ reduced })).catch((e) => console.warn('toybox unavailable', e));
 
 initReveal();
