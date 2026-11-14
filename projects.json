@@ -114,6 +114,37 @@
       }
     },
     {
+      "repo": "cluckwork-valley",
+      "group": "play",
+      "title": "Cluckwork Valley",
+      "kind": "Game world",
+      "subject": "Computing Technology · Year 9",
+      "scene": "cluck",
+      "accent": "#f6d743",
+      "tagline": "Farms that farm themselves. Chickens that run the company.",
+      "description": "The promotional site for Cluckwork Valley, an automated farm and factory world built in Minecraft Education for a Year 9 Computing Technology task on games and simulations. Observers and pistons harvest the crops on their own, and a chain of 29 command blocks runs a 30-floor lift. The site walks through how each system works, with the redstone logic and command code shown beside it.",
+      "features": [
+        "Self-harvesting farms built from observers and pistons",
+        "A 30-floor lift run by a chain of 29 command blocks",
+        "A day and night cycle, with a golem whose eyes glow after dark",
+        "A knockback arena and a Cluckcoin economy"
+      ],
+      "stack": [
+        "Minecraft Education",
+        "Redstone",
+        "Command blocks",
+        "MakeCode Python",
+        "Vanilla JS"
+      ],
+      "cta": "Tour the valley",
+      "caption": "The valley on a day and night cycle. Click a floor to call the lift, or click the chicken to earn a Cluckcoin.",
+      "alt": "A pixel-art valley with an iron golem, a field of sugar cane, a chicken in a hard hat and a tall tower with a gold lift moving between its floors.",
+      "pricing": {
+        "model": "free",
+        "note": "Free to explore. No account, nothing to install."
+      }
+    },
+    {
       "repo": "HSC-Writing-Master",
       "group": "work",
       "title": "Band 6",
