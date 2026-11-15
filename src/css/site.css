@@ -988,3 +988,98 @@ kbd {
 .ec-insight { grid-column: 1 / -1; margin: 1.2cqh 0 0; color: #3ecfd9; opacity: 0; transition: opacity 0.4s; }
 .ec-insight.on { opacity: 1; }
 @media (max-width: 520px) { .ec-table { display: none; } .ec-wrap { grid-template-columns: 1fr; } }
+
+/* ==========================================================================
+   Wayfinding: index head, taglines, pager, the Fetch button.
+   ========================================================================== */
+
+.catalogue-head { display: block; margin-bottom: clamp(24px, 3.5vw, 40px); }
+.catalogue-head h2 {
+  margin: 14px 0 0;
+  font: 350 clamp(34px, 5vw, 64px)/1.04 var(--serif);
+  font-variation-settings: 'opsz' 144;
+  letter-spacing: -0.03em;
+  text-wrap: balance;
+}
+.catalogue-head h2 em { font-style: italic; font-weight: 300; color: var(--muted); }
+.catalogue-hint { margin: 16px 0 0; color: var(--muted); font-size: 17px; }
+
+.ix-group > .label { display: flex; align-items: baseline; gap: 0.6em; }
+.ix-group > .label a { display: inline; padding: 0; margin: 0; border-radius: 0; color: var(--text); text-decoration: none; }
+.ix-group > .label a:hover { background: none; text-decoration: underline; text-underline-offset: 4px; }
+.ix-group > .label .ix-count { margin-left: auto; color: var(--dim); }
+.ix-text { display: grid; gap: 5px; min-width: 0; }
+.ix-tag {
+  font: 400 13.5px/1.35 var(--sans);
+  color: var(--dim);
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  transition: color 0.25s;
+}
+.ix-group a:hover .ix-tag, .ix-group a:focus-visible .ix-tag { color: var(--muted); }
+
+.chapter-head h2, .about h2, .toybox-head h2 { text-wrap: balance; }
+.chapter-head h2 { font-size: clamp(38px, 5.6vw, 76px); }
+.chapter-head h2 em { white-space: normal; }
+
+/* Previous / next, under every plate. */
+.pager {
+  grid-column: 1 / -1;
+  order: 3;
+  display: flex;
+  justify-content: space-between;
+  gap: 16px;
+  margin-top: clamp(4px, 1.5vw, 16px);
+}
+.pager a {
+  display: grid;
+  gap: 4px;
+  max-width: 48%;
+  padding: 10px 14px;
+  margin: 0 -14px;
+  border-radius: 10px;
+  text-decoration: none;
+  color: var(--muted);
+  transition: color 0.25s, background-color 0.25s;
+}
+.pager-next { text-align: right; margin-left: auto; }
+.pager small { font: 500 10px/1.2 var(--mono); letter-spacing: 0.16em; text-transform: uppercase; color: var(--dim); }
+.pager span { font: 400 17px/1.2 var(--serif); overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.pager-prev span::before { content: '← '; color: var(--dim); }
+.pager-next span::after { content: ' →'; color: var(--dim); }
+.pager a:hover { color: var(--accent); background: color-mix(in srgb, var(--accent) 7%, transparent); }
+
+/* The Fetch button in the top bar. */
+.nav-fetch {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  height: 32px;
+  margin: 0 4px 0 8px;
+  padding: 0 8px 0 14px;
+  border: 1px solid var(--line-2);
+  border-radius: 999px;
+  background: rgba(255, 255, 255, 0.03);
+  color: var(--text);
+  font: 500 12px/1 var(--mono);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: border-color 0.2s, background-color 0.2s;
+}
+.nav-fetch:hover { border-color: rgba(236, 230, 216, 0.4); background: rgba(255, 255, 255, 0.07); }
+.nav-fetch kbd { font-size: 11px; letter-spacing: 0; border-radius: 999px; }
+.no-js .nav-fetch { display: none; }
+
+@media (max-width: 760px) {
+  .topbar nav a:not(.nav-gh) { display: none; }
+  .nav-gh span { display: none; }
+}
+@media (max-width: 640px) {
+  .nav-fetch { padding: 0 14px; }
+  .nav-fetch kbd { display: none; }
+  .ix-group a { padding-block: 12px; }
+  .hero-label { flex-direction: column; align-items: flex-start; gap: 8px; }
+  .pager span { font-size: 15px; }
+}

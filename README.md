@@ -63,16 +63,18 @@ Each project entry looks like this:
 
 Add `"pricing": {"model": "free", "note": "…"}` for a Free badge, or `{"model": "paid", "note": "…", "tiers": [{"name", "price", "period", "features": [], "highlight": true}]}` for tier cards. The top-level `bundle` object renders the Teacher Toolkit card under the Work chapter. Specs for porting three of the plates into their own projects are in `docs/specs/`.
 
-### Motion and the toybox
+### Motion, the toybox and getting around
 
-Two optional layers sit on top of the page. If either fails to load, the page still works.
+Four optional layers sit on top of the page. If any of them fails to load, the page still works.
 
 | File | What it does |
 |---|---|
 | `src/js/motion.js`, `src/css/motion.css` | Scroll-progress bar, cursor spotlight tinted by the project under the pointer, magnetic buttons, heading scramble, staggered entrances, the scroll-reactive project marquee, drifting background grid and a pixel burst on the logo |
 | `src/js/toybox.js`, `src/css/toybox.css` | The Toybox: every project is a block in a small 2D rigid-body world. Drag, fling, shake or reset them, and tap one to jump to its plate. Touch-safe, keyboard reachable through a hidden link list, and a static grid under reduced motion |
+| `src/js/nav.js`, `src/css/nav.css` | Getting around: **Fetch**, a quick-jump palette (press `/` or Ctrl/Cmd+K, or use the Fetch button), a wayfinder rail of ticks down the right edge on desktop, and a now-viewing pill with previous and next. `j` / `k` step between plates. On a phone, Fetch opens as a bottom sheet |
+| `src/js/dog.js`, `src/css/dog.css` | The dog: a pixel mascot that trots along the top of the window as the scroll-progress marker, sits when you stop, and fetches (opens Fetch) when you click it |
 
-Both are generated from the same project list as the rest of the page, so new repos join the marquee and the toybox automatically.
+All of them are generated from the same project list as the rest of the page, so new repos join the marquee, the toybox and Fetch automatically. Without JavaScript, the index near the top and the previous / next links under every plate still get you everywhere.
 
 ### Scenes
 
@@ -89,6 +91,8 @@ Every plate is a small module in `src/js/scenes/` that exports `(host, { reduced
 | `softeng` | Linear search traced through a flowchart, NESA pseudocode and an array |
 | `entcomp` | A small data set collected, cleaned and charted, with the tallest bar called out as the insight |
 | `comptech` | A robot reads a sensor, decides and drives, shown as a live Input → Process → Output chart and pseudocode; click the grid to place walls and it re-plans with BFS |
+| `cluck` | A pixel-art valley on a day and night cycle; click a floor to call the lift, click the chicken for a Cluckcoin |
+| `yatzy` | Five dice with the exact best-play odds of four hands; click a die to hold it, click the table to roll |
 | `constellation` | Default for new repos: a constellation seeded from the repo name |
 
 ## Local preview

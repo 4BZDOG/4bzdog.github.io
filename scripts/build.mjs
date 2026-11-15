@@ -121,6 +121,13 @@ function roman(n) {
   return s;
 }
 
+const WORDS = ['zero', 'one', 'two', 'three', 'four', 'five', 'six', 'seven', 'eight', 'nine', 'ten', 'eleven', 'twelve',
+  'thirteen', 'fourteen', 'fifteen', 'sixteen', 'seventeen', 'eighteen', 'nineteen', 'twenty'];
+function countWord(n, capital) {
+  const w = WORDS[n] || String(n);
+  return capital ? w[0].toUpperCase() + w.slice(1) : w;
+}
+
 const prettyName = (repo) =>
   repo.replace(/[-_]+/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase()).replace(/\bHsc\b/g, 'HSC');
 
@@ -220,7 +227,7 @@ function renderIndex(projects) {
           <a href="#p-${esc(p.repo)}">
             <span class="ix-num">${p.numeral}</span>
             <span class="ix-swatch" aria-hidden="true"></span>
-            <span class="ix-title">${esc(p.title)}</span>
+            <span class="ix-text"><span class="ix-title">${esc(p.title)}</span><span class="ix-tag">${esc(p.tagline)}</span></span>
             <span class="ix-kind">${esc(p.kind)}</span>
             <span class="ix-go" aria-hidden="true">${ARROW}</span>
           </a>
@@ -229,7 +236,7 @@ function renderIndex(projects) {
         .join('');
       return `
       <div class="ix-group">
-        <p class="label"><span>${esc(g.numeral)}.</span> ${esc(g.title)} <em>— for ${key === 'play' ? 'fun' : key === 'work' ? 'real' : 'now'}</em></p>
+        <p class="label"><span>${esc(g.numeral)}.</span> <a href="#${key}">${esc(g.title)}</a> <em>— for ${key === 'play' ? 'fun' : key === 'work' ? 'real' : 'now'}</em><span class="ix-count">${pad2(list.length)}</span></p>
         <ol>${items}
         </ol>
       </div>`;
@@ -237,7 +244,15 @@ function renderIndex(projects) {
     .join('');
 }
 
-function renderExhibit(p) {
+function renderPager(p, all) {
+  const i = all.indexOf(p);
+  const link = (q, dir) => q
+    ? `<a class="pager-${dir}" href="#p-${esc(q.repo)}" style="--accent:${esc(q.accent)}"><small>${dir === 'prev' ? 'Previous' : 'Next'} · Plate ${q.numeral}</small><span>${esc(q.title)}</span></a>`
+    : `<a class="pager-${dir} pager-end" href="${dir === 'prev' ? '#catalogue' : '#log'}"><small>${dir === 'prev' ? 'Back to' : 'On to'}</small><span>${dir === 'prev' ? 'The index' : 'The build log'}</span></a>`;
+  return `<nav class="pager" aria-label="Neighbouring projects">${link(all[i - 1], 'prev')}${link(all[i + 1], 'next')}</nav>`;
+}
+
+function renderExhibit(p, all) {
   const s = p.stats;
   const meta = s
     ? `<dl class="meta">
@@ -279,6 +294,7 @@ function renderExhibit(p) {
           ${sourceBtn}
         </div>
       </div>
+      ${renderPager(p, all)}
     </article>`;
 }
 
@@ -321,7 +337,7 @@ function renderChapters(projects) {
       <h2 id="${key}-h">${esc(g.title)} <em>— ${esc(g.subtitle)}.</em></h2>
       <p class="chapter-blurb">${esc(g.blurb)}</p>
     </header>
-    ${list.map(renderExhibit).join('\n')}
+    ${list.map((p) => renderExhibit(p, projects)).join('\n')}
     ${key === 'work' ? renderBundle() : ''}
   </section>`;
     })
@@ -378,6 +394,13 @@ function renderMarquee(projects) {
 const toyboxData = (projects) =>
   JSON.stringify(projects.map((p) => ({ repo: p.repo, title: p.title, kind: p.kind, accent: p.accent, group: p.group })));
 
+// Read by nav.js (the Fetch palette, the wayfinder rail and the now-viewing pill).
+const projectsData = (projects) =>
+  JSON.stringify(projects.map((p) => ({
+    repo: p.repo, title: p.title, kind: p.kind, subject: p.subject, tagline: p.tagline,
+    accent: p.accent, group: p.group, groupTitle: config.groups[p.group]?.title || p.group, numeral: p.numeral,
+  }))).replace(/</g, '\\u003c');
+
 // ---------------------------------------------------------------- main
 
 const { stats, live } = await loadStats();
@@ -390,12 +413,15 @@ const slots = {
   ACCENTS: esc(projects.map((p) => p.accent).join(',')),
   MARQUEE: renderMarquee(projects),
   TOYBOX_DATA: esc(toyboxData(projects)),
+  PROJECTS_DATA: projectsData(projects),
   INDEX: renderIndex(projects),
   CHAPTERS: renderChapters(projects),
   TIMELINE: renderTimeline(projects, builtAt),
   BUILD_DATE: dayMonthYear(builtAt),
   BUILD_ISO: builtAt,
   WORK_COUNT: esc(String(projects.length)),
+  WORK_COUNT_WORD: esc(countWord(projects.length, true)),
+  MOOD_COUNT_WORD: esc(countWord(new Set(projects.map((p) => p.group)).size)),
   OWNER: esc(OWNER),
   YEAR: String(localParts(builtAt).y),
 };
