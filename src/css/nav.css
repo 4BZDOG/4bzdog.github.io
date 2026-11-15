@@ -435,7 +435,7 @@
 }
 
 @media (max-width: 640px) {
-  .nv-fab { display: grid; }
+  /* The top bar keeps its own Fetch button on small screens, so the floating one stays off. */
 
   .nv-dialog {
     top: auto;

@@ -174,9 +174,20 @@ function mount(still) {
     const vw = document.documentElement.clientWidth || innerWidth;
     const y = scrollY;
     const p = clamp(y / max, 0, 1);
-    // The sprite's left edge runs from 0 to (viewport - dog width), so it is always fully on screen.
-    root.style.transform = `translate3d(${(p * Math.max(0, vw - DOG_W)).toFixed(1)}px, 0, 0)`;
-    root.classList.toggle('is-left', p * Math.max(0, vw - DOG_W) + DOG_W + 160 > vw);
+    // The dog's run is the clear stretch of the top bar, between the logo and the
+    // first visible control, so it never walks over either. Without a top bar it
+    // uses the whole width.
+    let lo = 0, hi = Math.max(0, vw - DOG_W);
+    const brand = document.querySelector('.topbar .brand');
+    const first = [...document.querySelectorAll('.topbar nav > *')].find((n) => n.offsetParent !== null);
+    if (brand && first) {
+      const a = brand.getBoundingClientRect().right + 8;
+      const b = first.getBoundingClientRect().left - 8 - DOG_W;
+      if (b - a >= 24) { lo = a; hi = b; }
+    }
+    const x = lo + p * (hi - lo);
+    root.style.transform = `translate3d(${x.toFixed(1)}px, 0, 0)`;
+    root.classList.toggle('is-left', x + DOG_W + 160 > vw);
     const dy = y - s.y;
     s.y = y;
     if (dy) {

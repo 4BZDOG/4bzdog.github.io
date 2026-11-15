@@ -86,3 +86,6 @@
   .dg-say,
   .dg-tip { transition: none; transform: none; }
 }
+
+/* The bark takes over from the hover hint. */
+.dg-root:has(.dg-say.is-on) .dg-tip { opacity: 0 !important; }
